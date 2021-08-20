@@ -12,8 +12,9 @@ jobs:
     steps:
       - name: Build
         run: |
-          git clone https://github.com/grafana/grafana.git --branch v8.1.x
-          cd grafana
+          rm -Rf ./*
+          rm -Rf .git
+          git clone https://github.com/grafana/grafana.git --branch v8.1.x .
           git revert --no-commit d74d4d6be9122cfcb81c1840972a199397952cbb
           git revert --no-commit bb1dac3c7201e1a8b3bc7def7fdc355c1830623a
           rm -Rf .git
