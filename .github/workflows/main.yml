@@ -10,7 +10,7 @@ jobs:
   build:
     runs-on: ubuntu-latest
     steps:
-      - name: Build
+      - name: Prepare
         run: |
           rm -Rf ./*
           rm -Rf .git
@@ -18,13 +18,13 @@ jobs:
           git revert --no-commit d74d4d6be9122cfcb81c1840972a199397952cbb
           git revert --no-commit bb1dac3c7201e1a8b3bc7def7fdc355c1830623a
           rm -Rf .git
-          
-      - name: Docker Package Registry
-        uses: craftech-io/package-action@v3.1.0
+                    
+      - name: Build and publish Docker Image to GitHub Container registry
+        uses: VaultVulp/gp-docker-action@1.2.0
         with:
-          dockerfile: Dockerfile.ubuntu
-          image_name: grafana
-          access_token:  ${{ secrets.GITHUB_TOKEN }}
-          tags: latest
+          github-token:  ${{secrets.GITHUB_TOKEN}}
+          image-name: grafana-badgraph
+          image-tag: latest
+          dockerfile: ./Dockerfile.ubuntu
 
 
