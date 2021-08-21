@@ -1,0 +1,31 @@
+From 62116dff37e33c53b6641b0550b0beb7172853da Mon Sep 17 00:00:00 2001
+From: Riccardo Balbo <riccardo0blb@gmail.com>
+Date: Sat, 21 Aug 2021 09:14:17 +0200
+Subject: [PATCH] Always show graph in stats
+
+---
+ .../grafana-ui/src/components/BigValue/BigValueLayout.tsx     | 4 ++--
+ 1 file changed, 2 insertions(+), 2 deletions(-)
+
+diff --git a/packages/grafana-ui/src/components/BigValue/BigValueLayout.tsx b/packages/grafana-ui/src/components/BigValue/BigValueLayout.tsx
+index b1963dcdfff5a..d21b413245ce7 100644
+--- a/packages/grafana-ui/src/components/BigValue/BigValueLayout.tsx
++++ b/packages/grafana-ui/src/components/BigValue/BigValueLayout.tsx
+@@ -422,7 +422,7 @@ export function buildLayout(props: Props): BigValueLayout {
+   const useWideLayout = width / height > 2.5;
+ 
+   if (useWideLayout) {
+-    if (height > 50 && !!sparkline) {
++    if (/*height > 50 &&*/ !!sparkline) {
+       return new WideWithChartLayout(props);
+     } else {
+       return new WideNoChartLayout(props);
+@@ -430,7 +430,7 @@ export function buildLayout(props: Props): BigValueLayout {
+   }
+ 
+   // stacked layouts
+-  if (height > 100 && !!sparkline) {
++  if (/*height > 100&& */ !!sparkline) {
+     return new StackedWithChartLayout(props);
+   } else {
+     return new StackedWithNoChartLayout(props);

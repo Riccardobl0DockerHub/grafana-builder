@@ -10,16 +10,17 @@ jobs:
   build:
     runs-on: ubuntu-latest
     steps:
+      - name: Checkout
+        uses: actions/checkout@v2.3.4
+        
       - name: Prepare
         run: |
-          rm -Rf ./*
-          rm -Rf .git
           git clone https://github.com/grafana/grafana.git --branch v8.1.x 
           cd grafana
           git revert --no-commit d74d4d6be9122cfcb81c1840972a199397952cbb
           git revert --no-commit bb1dac3c7201e1a8b3bc7def7fdc355c1830623a
           mkdir -p patch
-          cp ../*.patch patch/
+          cp ../*.patch patch/ 
           for f in patch/*;
           do
             git apply $f
@@ -32,6 +33,6 @@ jobs:
           github-token:  ${{secrets.GITHUB_TOKEN}}
           image-name: grafana-badgraph
           image-tag: latest
-          dockerfile: grafana/Dockerfile.ubuntu
-
+          dockerfile: ./grafana/Dockerfile.ubuntu
+          build-context: ./grafana
 
