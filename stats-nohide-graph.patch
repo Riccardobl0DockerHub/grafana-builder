@@ -29,3 +29,4 @@ index b1963dcdfff5a..d21b413245ce7 100644
      return new StackedWithChartLayout(props);
    } else {
      return new StackedWithNoChartLayout(props);
+ 
